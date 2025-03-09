@@ -80,6 +80,12 @@ int main()
     for (int j=0; j<SIZE; j++)
         temp[j] = arr [j];
     
+     start = clock();
+    mergeSort(temp, 0, SIZE - 1);
+    end = clock();
 
+    printf("Execution time (Sequential): %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
+
+    return 0;
     
 }
