@@ -67,5 +67,19 @@ void mergeSort(int arr[], int left, int right) {
 
 int main() 
 {
+    int arr[SIZE];
+    srand(time(NULL));
 
+    // Generating Random Numbers to Fill the Array
+    for (int i=0; i<SIZE; i++)
+        arr[i]= rand() % 10000;
+
+    clock_t start,end;
+
+    int temp [SIZE];
+    for (int j=0; j<SIZE; j++)
+        temp[j] = arr [j];
+    
+
+    
 }
