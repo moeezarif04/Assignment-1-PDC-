@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <omp.h>
 
 #define SIZE 100000  
 
@@ -57,11 +58,18 @@ void merge(int arr[], int left, int mid, int right)
 void mergeSort(int arr[], int left, int right) {
     if (left < right) {
         int mid = left + (right - left) / 2;
-        
+        #pragma omp task
+        {
         mergeSort(arr, left, mid);
+        }
+        #pragma omp task
+        {
         mergeSort(arr, mid + 1, right);
-        
+        }
+        #pragma omp taskwait
+        {
         merge(arr, left, mid, right);
+        }
     }
 }
 
