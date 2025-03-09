@@ -79,6 +79,7 @@ int main()
     srand(time(NULL));
 
     // Generating Random Numbers to Fill the Array
+    #pragma omp parallel for
     for (int i=0; i<SIZE; i++)
         arr[i]= rand() % 10000;
 
