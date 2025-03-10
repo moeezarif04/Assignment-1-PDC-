@@ -58,20 +58,26 @@ void merge(int arr[], int left, int mid, int right)
 void mergeSort(int arr[], int left, int right) {
     if (left < right) {
         int mid = left + (right - left) / 2;
-        #pragma omp task
-        {
-        mergeSort(arr, left, mid);
+
+       
+        if (right - left > 1000) {
+            #pragma omp task
+            mergeSort(arr, left, mid);
+
+            #pragma omp task
+            mergeSort(arr, mid + 1, right);
+        } else {
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
         }
-        #pragma omp task
-        {
-        mergeSort(arr, mid + 1, right);
-        }
-        #pragma omp taskwait
-        {
+
+        // Ensure both tasks finish before merging
+        
+        #pragma omp taskwait  
         merge(arr, left, mid, right);
-        }
     }
 }
+
 
 int main() 
 {
