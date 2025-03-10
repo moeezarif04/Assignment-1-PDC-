@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE 100000  
+#define SIZE 1000000  
 
 
 // Function that we will use to merge the two arrays together
