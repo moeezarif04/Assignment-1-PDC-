@@ -70,7 +70,9 @@ int main()
     int arr[SIZE];
     srand(time(NULL));
 
-    // Generating Random Numbers to Fill the Array
+    // Generating Random Numbers to Fill the Array 
+    // Parallelizing initialization using static loop scheduling
+    #pragma omp parallel for
     for (int i=0; i<SIZE; i++)
         arr[i]= rand() % 10000;
 
