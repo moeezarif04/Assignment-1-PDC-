@@ -3,7 +3,7 @@
 #include <time.h>
 #include <omp.h>
 
-#define SIZE 1000000  
+#define SIZE 100000
 
 
 // Function that we will use to merge the two arrays together
