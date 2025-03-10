@@ -72,7 +72,7 @@ void mergeSort(int arr[], int left, int right) {
         }
 
         // Ensure both tasks finish before merging
-        
+
         #pragma omp taskwait  
         merge(arr, left, mid, right);
     }
@@ -83,6 +83,9 @@ int main()
 {
     int arr[SIZE];
     srand(time(NULL));
+
+    omp_set_num_threads(16);
+
 
     // Parallelizing the array initialization using OpenMP
     // usinig static loop scheduling
