@@ -76,17 +76,24 @@ int main()
     for (int i=0; i<SIZE; i++)
         arr[i]= rand() % 10000;
 
-    clock_t start,end;
-
+    double start_time, end_time;
     int temp [SIZE];
-    for (int j=0; j<SIZE; j++)
-        temp[j] = arr [j];
-    
-     start = clock();
-    mergeSort(temp, 0, SIZE - 1);
-    end = clock();
 
-    printf("Execution time (Sequential): %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
+    #pragma omp parallel
+    {
+        #pragma omp parallel for
+        for (int j=0; j<SIZE; j++)
+            temp[j] = arr [j];
+        
+        #pragma omp single
+        {
+            start_time = omp_get_wtime();
+            mergeSort(temp,0,SIZE-1);
+            end_time = omp_get_wtime();
+        }
+    }
+
+    printf("Execution time (Parallel): %f seconds\n", end_time - start_time);
 
     return 0;
     
