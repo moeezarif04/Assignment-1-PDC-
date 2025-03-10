@@ -70,30 +70,21 @@ int main()
     int arr[SIZE];
     srand(time(NULL));
 
-    // Generating Random Numbers to Fill the Array 
-    // Parallelizing initialization using static loop scheduling
-    #pragma omp parallel for
+    // Generating Random Numbers to Fill the Array
     for (int i=0; i<SIZE; i++)
         arr[i]= rand() % 10000;
 
-    double start_time, end_time;
+    clock_t start,end;
+
     int temp [SIZE];
+    for (int j=0; j<SIZE; j++)
+        temp[j] = arr [j];
+    
+     start = clock();
+    mergeSort(temp, 0, SIZE - 1);
+    end = clock();
 
-    #pragma omp parallel
-    {
-        #pragma omp parallel for
-        for (int j=0; j<SIZE; j++)
-            temp[j] = arr [j];
-        
-        #pragma omp single
-        {
-            start_time = omp_get_wtime();
-            mergeSort(temp,0,SIZE-1);
-            end_time = omp_get_wtime();
-        }
-    }
-
-    printf("Execution time (Parallel): %f seconds\n", end_time - start_time);
+    printf("Execution time (Sequential): %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
 
     return 0;
     
