@@ -84,7 +84,7 @@ int main()
     int arr[SIZE];
     srand(time(NULL));
 
-    omp_set_num_threads(16);
+    omp_set_num_threads(32);
 
 
     // Parallelizing the array initialization using OpenMP
