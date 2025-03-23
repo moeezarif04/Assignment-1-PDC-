@@ -91,7 +91,7 @@ int main()
     // usinig static loop scheduling
 
 //      #pragma omp parallel for schedule(static)
-    #pragma omp parallel for schedule(dynamic,500)
+    #pragma omp parallel for schedule(dynamic,1000)
         for (int i = 0; i < SIZE; i++)
             arr[i] = rand() % 10000;
  
