@@ -84,14 +84,15 @@ int main()
     int arr[SIZE];
     srand(time(NULL));
 
-    omp_set_num_threads(32);
+
 
 
     // Parallelizing the array initialization using OpenMP
     // usinig static loop scheduling
-//    #pragma omp parallel for schedule(dynamic)
-      #pragma omp parallel for schedule(static)
-         for (int i = 0; i < SIZE; i++)
+
+//      #pragma omp parallel for schedule(static)
+    #pragma omp parallel for schedule(dynamic,100)
+        for (int i = 0; i < SIZE; i++)
             arr[i] = rand() % 10000;
  
 
