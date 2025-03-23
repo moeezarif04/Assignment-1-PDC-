@@ -84,14 +84,17 @@ int main()
     int arr[SIZE];
     srand(time(NULL));
 
-    omp_set_num_threads(4);
+    omp_set_num_threads(8);
 
 
     // Parallelizing the array initialization using OpenMP
     // usinig static loop scheduling
-    #pragma omp parallel for schedule(static)
-    for (int i = 0; i < SIZE; i++)
-        arr[i] = rand() % 10000;
+//    #pragma omp parallel for schedule(dynamic)
+      #pragma omp parallel for schedule(static)
+         for (int i = 0; i < SIZE; i++)
+            arr[i] = rand() % 10000;
+ 
+
 
     double start_time, end_time;
     int temp[SIZE];
@@ -102,12 +105,11 @@ int main()
         for (int j = 0; j < SIZE; j++)
             temp[j] = arr[j];
 
-        #pragma omp single
-        {
+
             start_time = omp_get_wtime();
             mergeSort(temp, 0, SIZE - 1);
             end_time = omp_get_wtime();
-        }
+
     }
 
     printf("Execution time (Parallel): %f seconds\n", end_time - start_time);
